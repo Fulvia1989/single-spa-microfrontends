@@ -1,0 +1,27 @@
+
+<mat-toolbar color="primary" class="mat-elevation-z5">
+  <mat-toolbar-row>
+    <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="window.utils.openSideMenu()"
+      >
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <div>
+      <a mat-button routerLink="/material-test" routerLinkActive="active" >Material Example 1</a>
+      <a mat-button routerLink="/material-test2" routerLinkActive="active" >Material Example 2</a>
+      <a mat-button routerLink="/vue-material" routerLinkActive="active" >Vue Balm Material</a>
+
+     
+
+
+    </div>
+
+  
+</mat-toolbar-row>
+</mat-toolbar>
+
+
+<router-outlet></router-outlet>
