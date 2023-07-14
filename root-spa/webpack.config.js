@@ -1,0 +1,56 @@
+const { merge } = require("webpack-merge");
+const singleSpaDefaults = require("webpack-config-single-spa");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+module.exports = (webpackConfigEnv, argv) => {
+  const orgName = "test";
+  const defaultConfig = singleSpaDefaults({
+    orgName,
+    projectName: "root-config",
+    webpackConfigEnv,
+    argv,
+    disableHtmlGeneration: true,
+  });
+
+  return merge(defaultConfig, {
+    devServer: {
+      proxy: {
+        "/concorsi/*": {
+          target: "https://cpd-concorsi.dev.os02.ocp.cineca.it",
+          changeOrigin: true,
+        },
+        "/cd/*": {
+          target: "https://cpd-concorsi.dev.os02.ocp.cineca.it",
+          changeOrigin: true,
+        },
+        "/sc/*": {
+          target: "https://cpd-concorsi.dev.os02.ocp.cineca.it",
+          changeOrigin: true,
+        },
+        "/usr/*": {
+          target: "https://cpd-concorsi.dev.os02.ocp.cineca.it",
+          changeOrigin: true,
+        },
+        "/au/*": {
+          target: "https://cpd-concorsi.dev.os02.ocp.cineca.it",
+          changeOrigin: true,
+        },
+        "/be-sphinx/*": {
+          target: "https://cpd-concorsi.dev.os02.ocp.cineca.it",
+          changeOrigin: true,
+        },
+      },
+    },
+    // modify the webpack config however you'd like to by adding to this object
+    plugins: [
+      new HtmlWebpackPlugin({
+        inject: false,
+        template: "src/index.ejs",
+        templateParameters: {
+          isLocal: webpackConfigEnv && webpackConfigEnv.isLocal,
+          orgName,
+        },
+      }),
+    ],
+  });
+};
